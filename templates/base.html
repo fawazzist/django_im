@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTON3/azprG1Anm300gpJLm9Nao@Yz1ztcQTwFspd3yD65VohhpuuCOLASJC" crossorigin="anonymous">
+    <title>Dashboard</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'dashboard'%}">Home</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'active-delivery' %}">Active Orders</a>
+                </li>
+                {% if request.user.username == 'warehouse' or request.user.username == 'manager' %}
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'delivery-queue' %}">Delivery Queue</a>
+                </li>
+                {% endif %}
+                {% if request.user.username == 'producer' %}
+    <li class="nav-item">
+        <a class="nav-link active" href="{% url 'add-product' %}">Add Products</a>
+    </li>
+{% endif %}
+{% if request.user.username == 'manager' %}
+<li class="nav-item">
+    <a class="nav-link active" href="{% url 'products-dashboard' %}">View Product dashboard</a>
+</li>
+{% endif %}
+
+               
+              
+               
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">{{request.user.username}}</a>
+                </li>
+            </ul>
+            <a href="{% url 'logout'%}" class="btn btn-warning btn-sm">Logout</a>
+        </div>
+    </div>
+</nav>
+<div class="container mt-5">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{message.tags}}" role="alert">
+       <b>{{message}}</b>
+      </div>
+    {% endfor %}
+    {% endif %}
+    
+
+    {% block content%}
+    {% endblock content%}
+ 
+</div>
+<!-- Optional JavaScript; choose one of the two options -->
+<!-- Option 1: Bootstrap Bundle with Popper -->
+
+
+
+
+</body>
+</html>

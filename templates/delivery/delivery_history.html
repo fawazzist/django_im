@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card mx-auto" style="width: 76rem;">
+    <!--
+    <img src="..." class="card-ing-top" alt="...
+    -->
+    <div class="card-body">
+        <h5 class="card-title mb-3">Delivery History</h5>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Brand Name</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Serial Number</th>
+                    <th scope="col">Delivery Date</th>
+                    <th scope="col">Status</th>
+                    {% for o in obj %}
+                    {% if o.is_rejected%}
+                    <th scope="col">Status</th>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </thead>
+            <tbody>
+                {% for o in obj %}
+                <tr>
+                    <td>{{o.brand_name}}</td>
+                    <td>{{o.quantity}}</td>
+                    <td>{{o.serial_number}}</td>
+                    <td>{{o.delivery_date}}</td>
+                    {% if o.is_accepted%}
+                    <td><span class="badge bg-success">Enroute</span></td>
+                    {% elif o.is_rejected%}
+                    <td><span class="badge bg-damger">Rejected</span></td>
+                    {% else%}
+                    <td><span class="badge bg-warning">Pending</span></td>
+                    {% endif %}
+                </tr>
+                    {% endfor %}
+                <!-- Add more rows as needed -->
+            </tbody>
+        </table>
+        <!--
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+        card's content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+        -->
+    </div>
+</div>
+
+{% endblock content %}

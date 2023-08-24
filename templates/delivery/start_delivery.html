@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <form class="row g-3" method = 'POST' >
+            {% csrf_token %}
+            <div class="col-md-6">
+                <label for="inputPassword4" class="form-label"><b>Purchaser</b></label>
+                <input type="input" value={{request.user.username}} class="form-control" id="inputPassword4" readonly>
+              </div>
+            <div class="col-md-6">
+              <label for="inputEmail4" class="form-label"><b>Brand Name</b></label>
+              {% render_field form.brand_name class="form-control"%}
+            </div>
+            <div class="col-md-6">
+                <label for="inputEmail4" class="form-label"><b>quantity</b></label>
+                {% render_field form.quantity class="form-control"%}
+              </div>
+              <div class="col-md-6">
+                <label for="inputEmail4" class="form-label"><b>Serial Number</b></label>
+                {% render_field form.serial_number class="form-control"%}
+              </div>
+              <div class="col-md-6">
+                <label for="inputEmail4" class="form-label"><b>Delivery Date</b></label>
+                {% render_field form.delivery_date class="form-control"%}
+              </div>
+           
+          
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary">submit</button>
+            </div>
+          </form>
+    </div>
+  </div>
+{% endblock content %}
